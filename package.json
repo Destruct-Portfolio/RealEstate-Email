@@ -1,0 +1,28 @@
+{
+  "name": "real_estat-email",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "roll": "rimraf dist/* && tsc && cd dist && node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Destruct-Portfolio/Real_Estat-Email.git"
+  },
+  "author": "Destruct",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Destruct-Portfolio/Real_Estat-Email/issues"
+  },
+  "homepage": "https://github.com/Destruct-Portfolio/Real_Estat-Email#readme",
+  "dependencies": {
+    "@types/node": "^18.11.15",
+    "@ulixee/hero": "^2.0.0-alpha.16",
+    "@ulixee/server": "^2.0.0-alpha.12",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.9.4"
+  }
+}

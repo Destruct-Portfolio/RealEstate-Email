@@ -1,0 +1,27 @@
+Basic web scrapping tasks. Basically house scrapping and email if possible match for my friend. I will go into detail when we get up to this task.
+
+1. Check for new houses within the search requirements. Dont want to reprocess an address we have already seen before.
+
+[Done] https://www.allhomes.com.au/
+
+[BUG] https://www.domain.com.au/
+
+[NEED_NEW_MACHINE] https://www.realestate.com.au/
+
+[80%] https://zango.com.au/sale/
+
+2. For each unique address check price, if not listed (auction)
+
+[Done] https://www.propertyvalue.com.au/
+
+[Done] https://propertyinsights.nab.com.au/
+
+3. If within price range via either of the 2 checkers, then send an email per address with the below info
+   Address:
+   Price Range:
+   Screenshot:
+   URL:
+
+https://www.mailgun.com/pricing/ (5,000 per month)
+
+https://sendclean.com/ (unlimited - fall back if you have issues with the mailgun API)

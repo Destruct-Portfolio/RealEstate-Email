@@ -1,0 +1,10 @@
+https://www.allhomes.com.au/sale/search?region=canberra-act&propertytypes=house&beds=4-&baths=2-&parking=2-
+
+
+https://www.domain.com.au/sale/canberra-act/house/?bedrooms=4-any&bathrooms=2-any&carspaces=2-any
+
+
+https://www.realestate.com.au/buy/property-house-with-4-bedrooms-in-australian+capital+territory/list-1?numParkingSpaces=2&numBaths=2&includeSurrounding=false
+
+
+https://zango.com.au/sale/search/?listing_type=buy&surrounding=true&bedrooms__gte=4&bathrooms__gte=2&parking__gte=2&categories=House&order_by=price&property_status_groups=current,underOffer,includePrivate&region_group=ACT%20%26%20Surrounds&filters=1&page=1
