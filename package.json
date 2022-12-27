@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "roll": "rimraf dist/* && tsc && cd dist && node",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buildenv": "rimraf dist/* && tsc && node dist/utils/buildenv.js"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,16 @@
   },
   "homepage": "https://github.com/Destruct-Portfolio/Real_Estat-Email#readme",
   "dependencies": {
+    "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.15",
     "@ulixee/hero": "^2.0.0-alpha.16",
     "@ulixee/server": "^2.0.0-alpha.12",
+    "dotenv": "^16.0.3",
+    "form-data": "^4.0.0",
+    "lodash": "^4.17.21",
+    "mailgun.js": "^8.0.6",
     "rimraf": "^3.0.2",
+    "sendclean": "^1.0.2",
     "typescript": "^4.9.4"
   }
 }

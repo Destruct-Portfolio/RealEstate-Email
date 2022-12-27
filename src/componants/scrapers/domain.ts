@@ -1,13 +1,13 @@
 import Hero, { ISuperElement } from "@ulixee/hero";
 import Server from "@ulixee/server";
-import { AD } from "src/types";
+import { AD } from "src/interfaces/scraper";
 
 
 // the BREAK LOOP ISSUE THE Loop do not want to quite even tho there is an if statement is supposed to stop it 
 
 
 
-class Domain {
+export default class Domain {
   private client: Hero | null;
 
   private server: Server | null;
@@ -139,4 +139,4 @@ class Domain {
   }
 }
 
-console.log(await new Domain().exec());
+//console.log(await new Domain().exec());

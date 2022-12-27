@@ -1,13 +1,13 @@
 import Hero, { ISuperElement } from "@ulixee/hero";
 import Server from "@ulixee/server";
 import fs from "node:fs";
-import { AD } from "src/types";
+import { AD } from "src/interfaces/scraper";
 
 // need to fix the Fucking LOOP TO SCRAPE THE THINGS
 
 
 
-class allhomes {
+export default class Zango {
     private client: Hero | null;
     private server: Server | null;
     private source: string;
@@ -111,14 +111,14 @@ class allhomes {
                 "#__next > div.styleglobal__PageWrap-c1gt2v-22.fjDMGE > div > section:nth-child(6) > div > section:nth-child(1) > div > div > div > article"
             ).$map(async (item) => {
 
-                let Price: string | null | ISuperElement
+                let Price: string | null | ISuperElement // WTF is this
 
                 let link = await item.querySelector('div > a').href
                 let add = await item.querySelector('div > h3').innerText
                 Price = await item.querySelector('h4').innerText
 
                 // To check if the Price has Auction in the Sentence 
-                if (Price.includes("Auction")) {
+                if (Price!.includes("Auction")) {
                     Price = null
                 }
 
@@ -183,4 +183,4 @@ class allhomes {
     }
 }
 
-console.log(await new allhomes().exec());
+//console.log(await new allhomes().exec());

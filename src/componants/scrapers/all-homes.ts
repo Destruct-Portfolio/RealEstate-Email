@@ -1,8 +1,8 @@
 import Hero from "@ulixee/hero";
 import Server from "@ulixee/server";
-import { AD } from "src/types";
+import { AD } from "src/interfaces/scraper";
 
-class allhomes {
+export default class AllHomes {
   private client: Hero | null;
   private server: Server | null;
   private source: string;
@@ -57,7 +57,7 @@ class allhomes {
 
         let ADS = await this.client!.document.querySelectorAll(
           "div.css-1r6lu77"
-        ).$map(async (item) => {
+        ).$map(async (item: { querySelector: (arg0: string) => any; }) => {
           let Link = item.querySelector("a");
           let Add = item.querySelector("h2");
           let Price = item.querySelector("div.css-tjtee4");
@@ -94,4 +94,4 @@ class allhomes {
   }
 }
 
-console.log(await new allhomes().exec());
+//console.log(await new allhomes().exec());

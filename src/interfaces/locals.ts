@@ -1,0 +1,1 @@
+export type Locals = Record<"MailGunApiKey" | "DomainName" | "EmailSubject" | "EmailFrom" | "EmailTo" | "SendCleanToken" | "SendCleanOwnerId" | "SmtpUserName" | "PrLow" | "PrHigh" | "Location", string>

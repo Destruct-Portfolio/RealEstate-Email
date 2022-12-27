@@ -6,7 +6,7 @@ import fs from "fs";
  * website Refusing to lunch need to ask Robbert on whats up or Try on an other Machine 
  */
 
-class RealEstate {
+export default class RealEstate {
   private client: Hero | null;
 
   private server: Server | null;
@@ -96,4 +96,4 @@ class RealEstate {
   }
 }
 
-console.log(await new RealEstate().exec());
+//console.log(await new RealEstate().exec());

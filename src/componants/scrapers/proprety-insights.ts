@@ -1,17 +1,18 @@
 import Hero, { ISuperElement } from "@ulixee/hero";
 import Server from "@ulixee/server";
 import fs from "fs";
+import Locals from "../../misc/locals.js";
 
-class PropretyInsights {
+export default class PropretyInsights {
     private client: Hero | null
     private server: Server | null
     location: string
     private payload: { Proprety_Value_Estimated_Value: string | null }
     private waitFor: Boolean
-    constructor(Location: string) {
+    constructor() {
         this.client = null
         this.server = null
-        this.location = Location
+        this.location = Locals.Location
         this.payload = { Proprety_Value_Estimated_Value: null }
         this.waitFor = true
     }
@@ -70,7 +71,7 @@ class PropretyInsights {
     }
 
 
-    public async execute() {
+    public async exec() {
         await this.setup()
         if (this.client !== null) {
 
@@ -83,4 +84,4 @@ class PropretyInsights {
     }
 }
 
-console.log(await new PropretyInsights("46 Clarey Crescent Spence ACT 2615").execute())
+//console.log(await new PropretyInsights("46 Clarey Crescent Spence ACT 2615").execute())
