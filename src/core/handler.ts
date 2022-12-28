@@ -1,8 +1,8 @@
 import Locals from "src/misc/locals.js"
 import AllHomes from "../componants/scrapers/all-homes.js"
 import Domain from "../componants/scrapers/domain.js"
-import PropertyValue from "../componants/scrapers/property-value.js"
-import PropretyInsights from "../componants/scrapers/proprety-insights.js"
+import PropertyValue from "../componants/checkers/property-value.js"
+import PropretyInsights from "../componants/checkers/proprety-insights.js"
 import RealEstate from "../componants/scrapers/realestate.js"
 import Zango from "../componants/scrapers/zango.js"
 
@@ -10,6 +10,7 @@ import Zango from "../componants/scrapers/zango.js"
 import { AD } from "../interfaces/scraper"
 import MailGunWrapper from "src/componants/mailers/mailgun.js"
 import SendCleanWrapper from "src/componants/mailers/sendclean.js"
+import { Mail } from "src/interfaces/mail.js"
 
 
 export default class Handler {
@@ -18,9 +19,12 @@ export default class Handler {
         AllHomes,
         Zango,
         Domain,
-        PropertyValue,
-        PropretyInsights,
         RealEstate
+    ]
+    
+    private static checkers = [
+        PropertyValue,
+        PropretyInsights
     ]
 
     public static async exec() {
@@ -28,22 +32,40 @@ export default class Handler {
         let allResults: AD[] = []
         
         for(const site of Handler.sites){
-            //@ts-ignore
             allResults.push(...await new site().exec())
+        }
+        
+        for(const [index, result] of allResults.entries()){
+            if(!result.price_range){
+                const priceEstimations = []
+                for( const checker of Handler.checkers){
+                    const estimate = await new checker(result.address).exec()
+                    if(estimate) priceEstimations.push(estimate)
+                }
+
+                switch(priceEstimations.length) {
+                    case 0:
+                        break;
+                    case 1:
+                        allResults[index].price_range = priceEstimations.filter(price=>price)[0]
+                    case 2:
+                        allResults[index].price_range = eval(`(${priceEstimations[0]}+${priceEstimations[1]})/2`).toString()
+                }
+            }
         }
 
         allResults = allResults
+            .filter(result=>result.price_range) 
             .filter(result=>{
-                return eval(`${result.Price!} >= ${Locals.PrLow} && ${result.Price!} <= ${Locals.PrHigh}`)
-            })
+                // add logic for handling mutliple price formats
+                return eval(`${result.price_range!} >= ${Locals.PrLow} && ${result.price_range!} <= ${Locals.PrHigh}`)
 
-        for(const result of allResults){
-            //@ts-ignore
-            const status = await MailGunWrapper.send(result) // adjust the payload
+            }) as Mail.payload[]
+
+        for(const result of allResults as Mail.payload[]){
+            const status = await MailGunWrapper.send(result) 
             
             // fallback method
-
-            //@ts-ignore
             if(status!==0) await SendCleanWrapper.send(result)
         }
 

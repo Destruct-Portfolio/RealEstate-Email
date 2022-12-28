@@ -83,9 +83,11 @@ export default class Domain {
           })
 
           this.Payload.push({
-            Link: await item.querySelector('a').href,
-            Price: "(await Price)",
-            Location: (await item.querySelector('h2').innerText).split('\n').join('')
+            url: await item.querySelector('a').href,
+            price_range: "(await Price)",
+            address: (await item.querySelector('h2').innerText).split('\n').join(''),
+            // to add
+            screenshot: ''
           })
 
         });

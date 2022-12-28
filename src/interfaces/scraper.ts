@@ -1,5 +1,6 @@
 export interface AD {
-    Link: string
-    Price: string | null
-    Location: string
+    address: string;
+    price_range: string | null;
+    url: string;
+    screenshot: string ;
 }

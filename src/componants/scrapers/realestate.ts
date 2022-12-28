@@ -13,7 +13,8 @@ export default class RealEstate {
 
   private source: string;
 
-  private Payload: any[];
+  //@ts-ignore
+  private Payload: AD[];
 
   constructor() {
     this.client = null;
@@ -92,6 +93,7 @@ export default class RealEstate {
       return this.Payload;
     } else {
       console.log("Hero Failed To Load");
+      return this.Payload;
     }
   }
 }

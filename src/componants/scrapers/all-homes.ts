@@ -63,9 +63,11 @@ export default class AllHomes {
           let Price = item.querySelector("div.css-tjtee4");
 
           this.Payload.push({
-            Link: await Link.href,
-            Location: (await Add.innerText).split("\n").join(" "),
-            Price: (await Price.innerText).includes("Auction") ? null : await Price.innerText,
+            url: await Link.href,
+            address: (await Add.innerText).split("\n").join(" "),
+            price_range: (await Price.innerText).includes("Auction") ? null : await Price.innerText,
+            // to add 
+            screenshot: ''
           })
 
         });

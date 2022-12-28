@@ -3,6 +3,6 @@ export namespace Mail {
         address: string;
         price_range: string;
         url: string;
-        screenshot?: string ;
+        screenshot: string ;
     }
 }

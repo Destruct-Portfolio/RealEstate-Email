@@ -1,19 +1,18 @@
 import Hero, { ISuperElement } from "@ulixee/hero";
 import Server from "@ulixee/server";
 import fs from "fs";
-import Locals from "../../misc/locals.js";
 
 export default class PropretyInsights {
     private client: Hero | null
     private server: Server | null
     location: string
-    private payload: { Proprety_Value_Estimated_Value: string | null }
+    private payload:  string | null 
     private waitFor: Boolean
-    constructor() {
+    constructor(location: string) {
         this.client = null
         this.server = null
-        this.location = Locals.Location
-        this.payload = { Proprety_Value_Estimated_Value: null }
+        this.location = location
+        this.payload = null
         this.waitFor = true
     }
 
@@ -32,7 +31,7 @@ export default class PropretyInsights {
                     console.log(recorce.url)
                     console.log(await recorce.json)
                     let Data = await recorce.json
-                    this.payload.Proprety_Value_Estimated_Value = Data.estimatedvalue
+                    this.payload = Data.estimatedvalue
                     this.waitFor = false
                 }
             })
@@ -76,11 +75,10 @@ export default class PropretyInsights {
         if (this.client !== null) {
 
             await this.Bulk()
-
             return this.payload
-        } else {
-            console.log('Hero Failed To lunch')
-        }
+        } 
+        return this.payload
+    
     }
 }
 

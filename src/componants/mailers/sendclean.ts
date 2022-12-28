@@ -33,6 +33,6 @@ export default class SendCleanWrapper {
             }
         }
         
-        SendClean_client.composeMail(param)
+        await SendClean_client.composeMail(param)
     }
 }

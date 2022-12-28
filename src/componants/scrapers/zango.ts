@@ -173,12 +173,11 @@ export default class Zango {
             console.log("Starting the Job ");
 
             await this.Bulk();
-
-            return;
+            return this.Payload;
         } else {
             console.log("Server has Failed to load");
+            return this.Payload;
 
-            return;
         }
     }
 }

@@ -1,18 +1,17 @@
 import Hero, { ISuperElement } from "@ulixee/hero";
 import Server from "@ulixee/server";
 import fs from "fs";
-import Locals from "../../misc/locals.js";
 
 export default class PropertyValue {
     private client: Hero | null
     private server: Server | null
     location: string
-    private payload: { Proprety_Value_Estimated_Value: string | null }
-    constructor() {
+    private payload:  string | null 
+    constructor(location: string) {
         this.client = null
         this.server = null
-        this.location = Locals.Location
-        this.payload = { Proprety_Value_Estimated_Value: null }
+        this.location = location
+        this.payload = null
     }
 
     private async setup() {
@@ -49,7 +48,7 @@ export default class PropertyValue {
         let t: ISuperElement = await this.client!.document.querySelector('#propEstimatedPrice')
         let element = await this.client!.waitForElement(t)
         console.log(element ? await t.innerText : null)
-        this.payload.Proprety_Value_Estimated_Value = element ? await t.innerText : null
+        this.payload = element ? await t.innerText : null
     }
 
 
@@ -59,9 +58,9 @@ export default class PropertyValue {
             console.log('Fucking Cunt ')
             await this.Bulk()
             return this.payload
-        } else {
-            console.log('Hero Failed To lunch')
-        }
+        } 
+        
+        return this.payload
     }
 }
 
