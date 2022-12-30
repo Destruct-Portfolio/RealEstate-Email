@@ -1,7 +1,7 @@
 /** @format */
 import dotenv from "dotenv";
 dotenv.config({
-  path: "../.env"
+	path: "../.env"
 })
 export default class Locals {
 	static MailGunApiKey = process.env.MAIL_GUN_API_KEY!
@@ -14,6 +14,4 @@ export default class Locals {
 	static SmtpUserName = process.env.SMTP_USER_NAME!
 	static PrLow = process.env.PR_LOW!
 	static PrHigh = process.env.PR_HIGH!
-	static Location = process.env.Location!
-
 }

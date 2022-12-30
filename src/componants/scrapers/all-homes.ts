@@ -34,7 +34,8 @@ export default class AllHomes {
     });
   }
 
-  private async Bulk() {
+  private async Bulk(): Promise<void> {
+
     await this.client!.goto(this.source);
 
     await this.client!.waitForLoad("AllContentLoaded");
@@ -61,14 +62,24 @@ export default class AllHomes {
           let Link = item.querySelector("a");
           let Add = item.querySelector("h2");
           let Price = item.querySelector("div.css-tjtee4");
+          let screenshot = item.querySelector('img')
 
           this.Payload.push({
             url: await Link.href,
             address: (await Add.innerText).split("\n").join(" "),
             price_range: (await Price.innerText).includes("Auction") ? null : await Price.innerText,
             // to add 
-            screenshot: ''
+            screenshot: screenshot ? await screenshot.src : null
           })
+          console.log(
+            {
+              url: await Link.href,
+              address: (await Add.innerText).split("\n").join(" "),
+              price_range: (await Price.innerText).includes("Auction") ? null : await Price.innerText,
+              // to add 
+              screenshot: screenshot ? await screenshot.src : null
+            }
+          )
 
         });
       } catch (error) {
@@ -96,4 +107,4 @@ export default class AllHomes {
   }
 }
 
-//console.log(await new allhomes().exec());
+console.log(await new AllHomes().exec())

@@ -21,33 +21,33 @@ export default class Handler {
         Domain,
         RealEstate
     ]
-    
+
     private static checkers = [
         PropertyValue,
         PropretyInsights
     ]
 
     public static async exec() {
-        
+
         let allResults: AD[] = []
-        
-        for(const site of Handler.sites){
+
+        for (const site of Handler.sites) {
             allResults.push(...await new site().exec())
         }
-        
-        for(const [index, result] of allResults.entries()){
-            if(!result.price_range){
+
+        for (const [index, result] of allResults.entries()) {
+            if (!result.price_range) {
                 const priceEstimations = []
-                for( const checker of Handler.checkers){
+                for (const checker of Handler.checkers) {
                     const estimate = await new checker(result.address).exec()
-                    if(estimate) priceEstimations.push(estimate)
+                    if (estimate) priceEstimations.push(estimate)
                 }
 
-                switch(priceEstimations.length) {
+                switch (priceEstimations.length) {
                     case 0:
                         break;
                     case 1:
-                        allResults[index].price_range = priceEstimations.filter(price=>price)[0]
+                        allResults[index].price_range = priceEstimations.filter(price => price)[0]
                     case 2:
                         allResults[index].price_range = eval(`(${priceEstimations[0]}+${priceEstimations[1]})/2`).toString()
                 }
@@ -55,18 +55,18 @@ export default class Handler {
         }
 
         allResults = allResults
-            .filter(result=>result.price_range) 
-            .filter(result=>{
+            .filter(result => result.price_range)
+            .filter(result => {
                 // add logic for handling mutliple price formats
                 return eval(`${result.price_range!} >= ${Locals.PrLow} && ${result.price_range!} <= ${Locals.PrHigh}`)
 
             }) as Mail.payload[]
 
-        for(const result of allResults as Mail.payload[]){
-            const status = await MailGunWrapper.send(result) 
-            
+        for (const result of allResults as Mail.payload[]) {
+            const status = await MailGunWrapper.send(result)
+
             // fallback method
-            if(status!==0) await SendCleanWrapper.send(result)
+            if (status !== 0) await SendCleanWrapper.send(result)
         }
 
     }
